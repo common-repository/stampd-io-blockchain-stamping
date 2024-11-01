@@ -1,0 +1,17 @@
+/* =========================================
+		FONTS
+   ========================================= */
+
+/* Copyright (c) 2018, Minas Antonios */
+/* http://opensource.org/licenses/gpl-2.0.php GPL v2 or later */
+
+// Declare font mixin
+@mixin hpmDeclareFont($weight : normal, $size : false) {
+
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-weight: $weight;
+
+  @if ($size) {
+    @include hpmPixelsToRem('font-size', $size);
+  }
+}

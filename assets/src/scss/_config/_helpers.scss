@@ -1,0 +1,190 @@
+/* =========================================
+		HELPERS
+   ========================================= */
+
+/* Copyright (c) 2018, Minas Antonios */
+/* http://opensource.org/licenses/gpl-2.0.php GPL v2 or later */
+
+// Hides the text
+@mixin hpmTextReplace($type : '100% indent') {
+    @if $type == 'h5bp' {
+        border      : 0;
+        clip        : rect(0 0 0 0);
+        height      : 1px;
+        margin      : -1px;
+        overflow    : hidden;
+        padding     : 0;
+        position    : absolute;
+        width       : 1px;
+    } @else if $type == '100% indent' {
+        text-indent : 100%;
+        white-space : nowrap;
+        overflow    : hidden;
+        display     : inline-block;
+    }
+}
+
+// Creates a CSS border triangle
+@mixin hpmBorderTriangle($point : right, $color : $c_black, $width : 10px, $sides : 10px) {
+
+    @include hpmInlineBlock(middle);
+    width        : 0;
+    height       : 0;
+    border-style : solid;
+
+    $halvedWidth : ($width / 2);
+
+    @if $point == right {
+        border-width : $sides 0 $sides $width;
+        border-color : transparent transparent transparent $color;
+    } @else if $point == left {
+        border-width : $sides $width $sides 0;
+        border-color : transparent $color transparent transparent;
+    } @else if $point == top {
+        border-width : 0 $halvedWidth $sides $halvedWidth;
+        border-color : transparent transparent $color transparent;
+    } @else if $point == bottom {
+        border-width : $sides $halvedWidth 0 $halvedWidth;
+        border-color : $color transparent transparent transparent;
+    }
+
+}
+
+// Clearfix
+@mixin hpmContainerClearfix($type : 'modern') {
+    @if $type == 'modern' {
+        &:after {
+            content : "";
+            display : table;
+            clear   : both;
+        }
+    } @else if $type == 'old' {
+        zoom : 1;
+
+        &:before {
+            content : "";
+            display : table;
+        }
+
+        &:after {
+            content : "";
+            display : table;
+            clear   : both;
+        }
+    }
+}
+
+// Overrides default list styles
+@mixin hpmListOverride() {
+    list-style-type : none;
+    padding         : 0;
+    margin          : 0;
+}
+
+// Overrides default button styles
+@mixin hpmButtonReset() {
+    padding          : 0;
+    border           : 0;
+    outline          : 0;
+    background-color : transparent;
+}
+
+// Styles placeholders
+@mixin hpmPlaceholder($amp : false) {
+    @if $amp == true {
+        &::-webkit-input-placeholder {
+            @content
+        }
+        &:-moz-placeholder {
+            @content
+        }
+        &::-moz-placeholder {
+            @content
+        }
+        &:-ms-input-placeholder {
+            @content
+        }
+    } @else {
+        ::-webkit-input-placeholder {
+            @content
+        }
+        :-moz-placeholder {
+            @content
+        }
+        ::-moz-placeholder {
+            @content
+        }
+        :-ms-input-placeholder {
+            @content
+        }
+    }
+}
+
+// Owl carousel defaults
+@mixin hpmOwlDefault {
+    .owl-wrapper-outer,
+    .owl-stage-outer {
+        @include hpmWidthHeight();
+    }
+
+    .owl-wrapper,
+    .owl-stage {
+        @include hpmWidthHeight();
+    }
+
+    .owl-item {
+        height : 100%;
+    }
+}
+
+// Size width and height
+@mixin hpmWidthHeight($size : 100%) {
+    width  : $size;
+    height : $size;
+}
+
+// Input text defaults to style user input
+@mixin hpmInputText() {
+    p {
+        margin-bottom : 1.5em;
+    }
+
+    dfn, cite, em, i {
+        font-style : italic;
+    }
+
+    blockquote {
+        margin : 0 1.5em;
+    }
+
+    address {
+        margin : 0 0 1.5em;
+    }
+
+    pre {
+        margin-bottom : 1.6em;
+        max-width     : 100%;
+        overflow      : auto;
+        padding       : 1.6em;
+    }
+
+    code, kbd, tt, var {
+
+    }
+
+    abbr, acronym {
+        cursor : help;
+    }
+
+    mark, ins {
+        text-decoration : none;
+    }
+
+    big {
+        font-size : 125%;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        clear : both;
+    }
+}

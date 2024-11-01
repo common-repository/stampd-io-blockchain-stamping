@@ -1,0 +1,91 @@
+/* =========================================
+		COLORS AND DEFINITIONS
+   ========================================= */
+
+/* Copyright (c) 2018, Minas Antonios */
+/* http://opensource.org/licenses/gpl-2.0.php GPL v2 or later */
+
+// black and white
+$c_white : #FFF;
+$c_alabaster : #F7F5EF;
+$c_gallery : #EBEBEB;
+$c_alto : #D8D8D8;
+$c_silver : #BDBDBD;
+$c_silver_chalice : #A0A0A0;
+$c_gray : #898989;
+$c_boulder : #797979;
+$c_dove_gray : #626262;
+$c_tundora : #4E4E4E;
+$c_mine_shaft : #323232;
+$c_black : #000;
+
+// notification
+$c_notify_light_red_error : #F0CDCC;
+$c_notify_red_error : #EF2A25;
+$c_notify_light_green_success : #BFF3C3;
+$c_notify_green_success : #23A92E;
+$c_notify_light_orange_info : #F5CDB8;
+$c_notify_orange_info : #DB560F;
+
+// wordpress official
+$c_wordpress_gray : #B4B9BE;
+$c_wordpress_dark_gray : #444;
+$c_wordpress_cyan : #1E8CBE;
+$c_wordpress_blue : #0073AA;
+$c_wordpress_red_error : #DC3232;
+
+// social official colors
+$c_social_blue_facebook : #0E5AD3;
+$c_social_cyan_twitter : #5AD5FB;
+$c_social_red_email : #E02718;
+$c_social_gray_more : #C0C0C0;
+$c_social_orange_google_plus : #DC4E41;
+$c_social_cyan_reddit : #5F99CF;
+$c_social_gray_linkedin : #313335;
+$c_social_orange_stumbleupon : #EB4924;
+$c_social_red_pinterest : #BD081C;
+$c_social_red_youtube : #E52D27;
+
+/* =========================================
+		Z-INDEX
+   ========================================= */
+
+$z_index_back : -1;
+$z_index_min : 1;
+$z_index_parsley_errors : 400;
+$z_index_embeded : 500;
+$z_index_header : 2000;
+$z_index_max : 9999;
+
+/* =========================================
+		SIZING & BREAKPOINTS
+   ========================================= */
+
+//$s_header_height : 78px;
+//$s_header_height--mobile : 136px;
+//$s_header_height--mobile--menu-opened : 271px;
+
+// content max width
+//$s_container_max_width : 1160px;
+//$s_container_inner_max_width : 1800px;
+
+// responsive breakpoints
+$sr_desktop_large : 1921px;
+$sr_tablet_landscape : 1330px;
+$sr_tablet_portrait : 1050px;
+$sr_mobile_landscape : 900px;
+$sr_mobile_portrait : 500px;
+
+//$sr_onload_effects : 1000px;
+// onload effects will be shown from this width upwards
+
+/* =========================================
+		TIMINGS
+   ========================================= */
+
+$t_fast_animation : 60ms;
+$t_fast_medium_animation : 110ms;
+$t_medium_animation : 250ms;
+$t_slow_medium_animation : 440ms;
+$t_slow_animation : 780ms;
+$t_very_slow_animation : 1600ms;

@@ -1,0 +1,27 @@
+/* =========================================
+		ADMIN STYLES
+   ========================================= */
+/* Copyright (c) 2018, Minas Antonios */
+/* http://opensource.org/licenses/gpl-2.0.php GPL v2 or later */
+@import "common";
+
+#stampd_ext_wp_post_metabox {
+  .inside:not(.inside--actual) {
+    padding: 0;
+    margin: 0;
+  }
+
+  input.full-width {
+    width: 100%;
+  }
+
+  .float-right {
+    float: right;
+  }
+}
+
+.stampd-logo {
+  display: block;
+  max-height: 40px;
+}
+

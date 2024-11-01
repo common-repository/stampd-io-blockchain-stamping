@@ -1,0 +1,211 @@
+/* =========================================
+		MIXINS
+   ========================================= */
+
+/* Copyright (c) 2018, Minas Antonios */
+/* http://opensource.org/licenses/gpl-2.0.php GPL v2 or later */
+
+// Add ellipsis if text is too large to display
+@mixin hpmSingleLineEllipsis() {
+	white-space   : nowrap;
+	overflow      : hidden;
+	text-overflow : ellipsis;
+}
+
+// Display inline block and vertical align
+@mixin hpmInlineBlock($vertical_align : top) {
+	display        : inline-block;
+	vertical-align : $vertical_align;
+}
+
+// Converts pixels to rems with fallback
+@mixin hpmPixelsToRem($attributeName : font-size, $sizeValue : 1.6) {
+
+	#{$attributeName} : $sizeValue + px;
+	#{$attributeName} : ($sizeValue / 10) + rem;
+}
+
+// Converts pixels to rems with fallback in font size
+@mixin hpmFontSizePixelsToRem($sizeValue : 1.6) {
+
+	font-size : $sizeValue + px;
+	font-size : ($sizeValue / 10) + rem;
+}
+
+// Set background cover
+@mixin hpmBackgroundCover($position : center) {
+
+	background-size     : cover;
+	background-position : $position;
+	background-repeat   : no-repeat;
+}
+
+// Add transition delay to nth of type elements
+@mixin hpmNthTransitionDelay($items : 4, $delay : 50ms) {
+	@for $i from 1 through $items {
+		&:nth-of-type(#{$i}) {
+			transition-delay : $delay * $i;
+		}
+	}
+}
+
+// Add animation delay to nth of type elements
+@mixin hpmNthAnimationDelay($items : 4, $delay : 50ms) {
+	@for $i from 1 through $items {
+		&:nth-of-type(#{$i}) {
+			animation-delay : $delay * $i;
+		}
+	}
+}
+
+// Apply grayscale filter
+@mixin hpmGrayscale($toggle : "on", $percentage : 1) {
+	$svg-type : "matrix";
+	$svg-value : "0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0";
+	$ie-alpha : alpha(#{"opacity="}round($percentage * 100));
+
+	@if $percentage != 1 {
+		$svg-type : "saturate";
+		$svg-value : $percentage;
+	}
+
+	@if $toggle == "on" {
+		filter         : url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'#{$svg-type}\' values=\'#{$svg-value}\'/></filter></svg>#grayscale"); // Firefox 10+, Firefox on Android
+		filter         : gray $ie-alpha; // IE6-9
+		-webkit-filter : grayscale(round($percentage * 100%)); // Chrome 19+, Safari 6+, Safari 6+ iOS
+		filter         : grayscale(round($percentage * 100%)); // Catch-all
+	}
+
+	@if $toggle == "off" {
+		@if $svg-type == "saturate" {
+			filter : none;
+		} @else {
+			filter : url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'1 0 0 0 0, 0 1 0 0 0, 0 0 1 0 0, 0 0 0 1 0\'/></filter></svg>#grayscale");
+		}
+		-webkit-filter : grayscale(0%);
+		filter         : grayscale(0);
+	}
+}
+
+// Simple breakpoint implementation with max-width, min-width, max-height and min-height
+@mixin hpmResponsive($breakpoint-max-width : 1px, $breakpoint-min-width : false, $breakpoint-max-height : false, $breakpoint-min-height : false) {
+
+	// create the media query
+	$media-query : 'screen ';
+
+	// add max width
+	@if $breakpoint-max-width != false and unitless($breakpoint-max-width) == false {
+		$media-query : $media-query + 'and (max-width : ' + $breakpoint-max-width + ') ';
+	}
+
+	// add min width
+	@if $breakpoint-min-width != false and unitless($breakpoint-min-width) == false {
+		$media-query : $media-query + 'and (min-width : ' + $breakpoint-min-width + ') ';
+	}
+
+	// add max height
+	@if $breakpoint-max-height != false and unitless($breakpoint-max-height) == false {
+		$media-query : $media-query + 'and (max-height : ' + $breakpoint-max-height + ') ';
+	}
+
+	// add min height
+	@if $breakpoint-min-height != false and unitless($breakpoint-min-height) == false {
+		$media-query : $media-query + 'and (min-height : ' + $breakpoint-min-height + ') ';
+	}
+
+	@media #{$media-query} {
+		& {
+			@content;
+		}
+	}
+}
+
+// Returns easing curves
+@function hpmEasing($easing) {
+	$easings : (
+			'inCubic': cubic-bezier(0.550, 0.055, 0.675, 0.190),
+			'outCubic': cubic-bezier(0.215, 0.610, 0.355, 1.000),
+			'inOutCubic': cubic-bezier(0.645, 0.045, 0.355, 1.000),
+			'inCirc': cubic-bezier(0.600, 0.040, 0.980, 0.335),
+			'outCirc': cubic-bezier(0.075, 0.820, 0.165, 1.000),
+			'inOutCirc': cubic-bezier(0.785, 0.135, 0.150, 0.860),
+			'inExpo': cubic-bezier(0.950, 0.050, 0.795, 0.035),
+			'outExpo': cubic-bezier(0.190, 1.000, 0.220, 1.000),
+			'inOutExpo': cubic-bezier(1.000, 0.000, 0.000, 1.000),
+			'inQuad': cubic-bezier(0.550, 0.085, 0.680, 0.530),
+			'outQuad': cubic-bezier(0.250, 0.460, 0.450, 0.940),
+			'inOutQuad': cubic-bezier(0.455, 0.030, 0.515, 0.955),
+			'inQuart': cubic-bezier(0.895, 0.030, 0.685, 0.220),
+			'outQuart': cubic-bezier(0.165, 0.840, 0.440, 1.000),
+			'inOutQuart': cubic-bezier(0.770, 0.000, 0.175, 1.000),
+			'inQuint': cubic-bezier(0.755, 0.050, 0.855, 0.060),
+			'outQuint': cubic-bezier(0.230, 1.000, 0.320, 1.000),
+			'inOutQuint': cubic-bezier(0.860, 0.000, 0.070, 1.000),
+			'inSine': cubic-bezier(0.470, 0.000, 0.745, 0.715),
+			'outSine': cubic-bezier(0.390, 0.575, 0.565, 1.000),
+			'inOutSine': cubic-bezier(0.445, 0.050, 0.550, 0.950),
+			'inBack': cubic-bezier(0.600, -0.280, 0.735, 0.045),
+			'outBack': cubic-bezier(0.175, 0.885, 0.320, 1.275),
+			'inOutBack': cubic-bezier(0.680, -0.550, 0.265, 1.550)
+	);
+
+	@return map-get($easings, $easing);
+}
+
+// Replace `$search` with `$replace` in `$string`
+// @author Hugo Giraudel
+// @param {String} $string - Initial string
+// @param {String} $search - Substring to replace
+// @param {String} $replace ('') - New value
+// @return {String} - Updated string
+@function str-replace($string, $search, $replace: '') {
+	$index : str-index($string, $search);
+
+	@if $index {
+		@return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+	}
+
+	@return $string;
+}
+
+// Adds an animation to &
+@mixin hpmAnimation($animationParameters : '') {
+
+	$animationName : #{&}__animation;
+	$animationName : str-replace($animationName, '(', '');
+	$animationName : str-replace($animationName, ')', '');
+	$animationName : str-replace($animationName, ' > ', '_direct-child_');
+	$animationName : str-replace($animationName, ' ~ ', '_right-after-first_');
+	$animationName : str-replace($animationName, ' + ', '_after-first_');
+	$animationName : str-replace($animationName, ' ', '_direct_');
+	$animationName : str-replace($animationName, ':', '--');
+	$animationName : str-replace($animationName, '~', '__');
+	$animationName : str-replace($animationName, '.', '');
+
+	animation : $animationName $animationParameters;
+
+	@keyframes #{$animationName} {
+		@content;
+	}
+}
+
+// Center display block with width
+@mixin hpmCenterBlock() {
+	display      : block;
+	margin-left  : auto;
+	margin-right : auto;
+}
+
+// Emulate size cover on img tag
+@mixin hpmImgEmulateCover() {
+	position   : absolute;
+	top        : 50%;
+	left       : 50%;
+	width      : auto !important;
+	height     : auto !important;
+	max-height : none;
+	max-width  : none;
+	min-height : 100%;
+	min-width  : 100%;
+	transform  : translate(-50%, -50%);
+}

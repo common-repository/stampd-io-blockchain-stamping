@@ -1,0 +1,52 @@
+/* =========================================
+		ADMIN STYLES
+   ========================================= */
+/* Copyright (c) 2018, Minas Antonios */
+/* http://opensource.org/licenses/gpl-2.0.php GPL v2 or later */
+/* =========================================
+		COMMON STYLES
+   ========================================= */
+/* Copyright (c) 2018, Minas Antonios */
+/* http://opensource.org/licenses/gpl-2.0.php GPL v2 or later */
+/* =========================================
+		COLORS AND DEFINITIONS
+   ========================================= */
+/* Copyright (c) 2018, Minas Antonios */
+/* http://opensource.org/licenses/gpl-2.0.php GPL v2 or later */
+/* =========================================
+		Z-INDEX
+   ========================================= */
+/* =========================================
+		SIZING & BREAKPOINTS
+   ========================================= */
+/* =========================================
+		TIMINGS
+   ========================================= */
+/* =========================================
+		MIXINS
+   ========================================= */
+/* Copyright (c) 2018, Minas Antonios */
+/* http://opensource.org/licenses/gpl-2.0.php GPL v2 or later */
+/* =========================================
+		HELPERS
+   ========================================= */
+/* Copyright (c) 2018, Minas Antonios */
+/* http://opensource.org/licenses/gpl-2.0.php GPL v2 or later */
+/* =========================================
+		FONTS
+   ========================================= */
+/* Copyright (c) 2018, Minas Antonios */
+/* http://opensource.org/licenses/gpl-2.0.php GPL v2 or later */
+#stampd_ext_wp_post_metabox .inside:not(.inside--actual) {
+  padding: 0;
+  margin: 0; }
+
+#stampd_ext_wp_post_metabox input.full-width {
+  width: 100%; }
+
+#stampd_ext_wp_post_metabox .float-right {
+  float: right; }
+
+.stampd-logo {
+  display: block;
+  max-height: 40px; }
